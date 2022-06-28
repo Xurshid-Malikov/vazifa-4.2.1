@@ -1,0 +1,17 @@
+.container{
+  width: 1140px;
+  margin: 0 auto;
+}
+ul{ 
+  display: flex;
+  flex-wrap: wrap;
+} 
+li{
+  background-color: rgb(136, 136, 136);
+  color:rgb(243, 219, 0);
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  margin: 10px;
+}
