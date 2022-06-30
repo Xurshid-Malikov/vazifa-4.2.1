@@ -412,11 +412,11 @@ function domgachiqaqol(array,node){
 	for (i of array){
 		var newItam = document.createElement("li");
 		var elId = document.createElement("h2");
-		var elTitle = document.createElement("h3");
+		var elTitle = document.createElement("strong");
 		var elPoster = document.createElement("img");
+		var elRelease_date = document.createElement("h3");
+		var elGenres = document.createElement("h3");
 		var elOverview = document.createElement("strong");
-		var elRelease_date =document.createElement("h4");
-		var elGenres =document.createElement("h4");
 	
 		newItam.setAttribute("class", "item")
 		elPoster.setAttribute("class", "img")
@@ -424,20 +424,51 @@ function domgachiqaqol(array,node){
 		newItam.appendChild(elId)
 		newItam.appendChild(elTitle)
 		newItam.appendChild(elPoster)
-		newItam.appendChild(elOverview)
 		newItam.appendChild(elRelease_date)
 		newItam.appendChild(elGenres)
+		newItam.appendChild(elOverview)
 	
 	
 	elId.textContent = `Id: ${i.id}`;
 	elTitle.textContent = `Title: ${i.title}`;
 	elPoster.src = `${i.poster}`;
-	elOverview.textContent = `Overview: ${i.overview}`;
 	elRelease_date.textContent = `Release_date: ${i.release_date}`;
 	elGenres.textContent = `Genres: ${i.genres}`;
+	elOverview.textContent = `Overview: ${i.overview}`;
 	elPoster.setAttribute("alt", "images-film")
 	elPoster.setAttribute("with", "100%")
 	elPoster.setAttribute("height", "300")
 	}
 }
 domgachiqaqol(films, elList)
+
+
+var elSelect = document.querySelector(".js-select");
+let myArray = [];
+
+for (item of films) {
+  myArray.push(...item.genres);
+}
+
+let mySet = new Set(myArray);
+
+for (const item of Array.from(mySet)) {
+  let li = document.createElement("option");
+  li.textContent = item;
+  elSelect.appendChild(li);
+}
+
+
+var result = [];
+
+elSelect.addEventListener("change",function(){
+	elList.innerHTML = "";
+	result = [];
+  films.forEach((poc) => {
+    if(poc.genres.includes(elSelect.value)){
+      result.push(poc);
+    }
+  })
+	domgachiqaqol(result,elList);
+	
+});
