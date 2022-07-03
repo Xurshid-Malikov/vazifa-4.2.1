@@ -444,6 +444,7 @@ domgachiqaqol(films, elList)
 
 
 var elSelect = document.querySelector(".js-select");
+let elSelectZA = document.querySelector(".select");
 let myArray = [];
 
 for (item of films) {
@@ -452,14 +453,12 @@ for (item of films) {
 
 let mySet = new Set(myArray);
 
+var result = [];
 for (const item of Array.from(mySet)) {
   let li = document.createElement("option");
   li.textContent = item;
   elSelect.appendChild(li);
 }
-
-
-var result = [];
 
 elSelect.addEventListener("change",function(){
 	elList.innerHTML = "";
@@ -470,5 +469,67 @@ elSelect.addEventListener("change",function(){
     }
   })
 	domgachiqaqol(result,elList);
-	
 });
+
+let result1 = [];
+
+// let za = document.createElement("option");
+// let az = document.createElement("option");
+// za.textContent = "Z - A";
+// az.textContent = "A - Z";
+// elSelectZA.appendChild(za);
+// elSelectZA.appendChild(az);
+
+
+elSelectZA.addEventListener("change", function(){
+	elList.innerHTML = "";
+	result1 = [];
+	result1 = films.sort((t,s) => {
+		if(t.title < s.title ,elSelectZA.value === "ZA"){
+			return -1
+		}
+		else if(s.title > t.title){
+			return -1
+		}
+	});
+	domgachiqaqol(result1,elList)
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// elSelectAZ.addEventListener("change", function(){
+// 	elList.innerHTML = "";
+// 	result = [];
+// 	result = films.sort((t,s) => {
+// 		if(t.title > s.title){
+// 			return -1
+// 		}
+		
+// 	});
+// 	domgachiqaqol(result,elList)
+// });
+// elSelect.addEventListener("change", function(){
+// 	console.log(films.sort((t,s) => {
+// 		if(s.title > t.title){
+// 			return -1
+// 		}
+// 	}));
+// })
